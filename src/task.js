@@ -1,5 +1,9 @@
 
 
 export function Task(taskName){
-    return {taskName}
+
+    let name=taskName
+
+    return {name}
+
 }

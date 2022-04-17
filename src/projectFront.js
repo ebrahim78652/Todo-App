@@ -1,5 +1,6 @@
 import { addNewProject, setCurrentlySelectedProject } from "./logic.js"
 import { makeElement } from './DOMUtilities.js'
+import {displayAllTasks} from "./taskFront.js"
 
 
 //now add listener to the add sign. 
@@ -51,6 +52,9 @@ export function makeNewProjectDiv(nameOfProject){
        newProject.addEventListener("click", addListenerOnProject);
        let project_sidebar_body = document.querySelector(".project_sidebar_body");
        project_sidebar_body.append(newProject);
+
+       switchCurrentProjectTo(newProject);
+
 }
 
 
@@ -62,8 +66,22 @@ function addListenerOnProject(e) {
     }
     e.target.classList.add("project-clicked");
     setCurrentlySelectedProject(e.target.textContent);
+
+    //show the tasks only in the current project. 
+    displayAllTasks()
 }
 
+function switchCurrentProjectTo(newProject) {
+    let previouslyClickedProject = document.querySelector(".project-clicked");
+    if (previouslyClickedProject) {
+        previouslyClickedProject.classList.toggle("project-clicked");
+    }
+    newProject.classList.add("project-clicked");
+    setCurrentlySelectedProject(newProject.textContent);
+
+    //show the tasks only in the current project. 
+    displayAllTasks()
+}
 
 
 

@@ -24,14 +24,13 @@ export function addNewProject(contentOfInput){
 
 export function setCurrentlySelectedProject(clickedProject){
 console.log(`the project selected  is: ${clickedProject} `);
-
-currentlySelectedProject= projectsArray.filter((element)=>{
-    if(element.name==clickedProject){
+let temp = projectsArray.filter((element)=>{
+    if(element.project_name==clickedProject){
         return true;
     }
 })
-
-console.log(currentlySelectedProject);
+    currentlySelectedProject= temp[0];
+    console.log(currentlySelectedProject);
 }
 
 export function getCurrentlySelectedProject(){
@@ -40,4 +39,14 @@ export function getCurrentlySelectedProject(){
 
 export function addnewTaskToCurrentProject(taskName){
     currentlySelectedProject.addTask(taskName);
+}
+
+export function removeTaskFromArray(nameOfTask){
+    console.log(currentlySelectedProject);
+    console.log(nameOfTask);
+    console.log(currentlySelectedProject.tasks);
+    currentlySelectedProject.deleteTask(nameOfTask);
+    console.log(currentlySelectedProject.tasks);
+
+
 }

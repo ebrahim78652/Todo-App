@@ -1,5 +1,5 @@
 import { makeElement } from './DOMUtilities.js'
-import { getCurrentlySelectedProject, addnewTaskToCurrentProject } from "./logic.js"
+import { getCurrentlySelectedProject, addnewTaskToCurrentProject, removeTaskFromArray } from "./logic.js"
 
 
 export function setUpListenerTask() {
@@ -38,16 +38,23 @@ function addListenerOnInputBox(input_box) {
 
 function newTaskDiv(taskName) {
     let taskdiv = makeElement("div", "task", undefined);
-    let currentlySelectedProject = getCurrentlySelectedProject()
+
+
+    let currentlySelectedProject = getCurrentlySelectedProject();
     console.log(currentlySelectedProject);
     console.log("the number of tasks in currently selected project is")
     console.log(currentlySelectedProject.getNumberOfTasks());
 
+    //most of the logic below not needed. delete later.
+
     let numberOftasksInCurrentlySelectedProject = currentlySelectedProject.getNumberOfTasks();
     let checkBoxInput = makeElement("input", undefined, undefined);
+
     checkBoxInput.setAttribute("type", "checkbox");
     checkBoxInput.setAttribute("data", numberOftasksInCurrentlySelectedProject);
     checkBoxInput.setAttribute("id", numberOftasksInCurrentlySelectedProject);
+    //add listener to the checkbox
+    checkBoxInput.addEventListener("change", removeTask)
     console.log(checkBoxInput);
 
     //change below line in the end
@@ -60,8 +67,48 @@ function newTaskDiv(taskName) {
     taskdiv.append(checkBoxInput, label);
     let tasks_body = document.querySelector(".tasks_body");
     tasks_body.append(taskdiv);
+}
 
-
-
+function removeTask(e) {
+    console.log("trying to remove task");
+    let nameOfTaskToDelete = e.target.nextElementSibling.textContent;
+    console.log(`name of the task to be deleted ${nameOfTaskToDelete}`);
+    removeTaskFromArray(nameOfTaskToDelete);
+    e.target.parentElement.remove();
 
 }
+
+export function displayAllTasks() {
+
+
+    let divsToRemove = document.querySelectorAll(".task");
+
+    if (divsToRemove != null) {
+        Array.from(divsToRemove).forEach((element) => {
+            element.remove();
+        })
+    }
+
+
+    let tasks = getCurrentlySelectedProject().tasks;
+    tasks.forEach(function (task, index) {
+
+        let taskdiv = makeElement("div", "task", undefined);
+
+        let checkBoxInput = makeElement("input", undefined, undefined);
+        checkBoxInput.setAttribute("type", "checkbox");
+        checkBoxInput.setAttribute("id", index);
+            //add listener to the checkbox
+        checkBoxInput.addEventListener("change", removeTask)
+
+        let label = makeElement("label", undefined, task.name);
+        label.setAttribute("for", index);
+
+        taskdiv.append(checkBoxInput, label);
+        let tasks_body = document.querySelector(".tasks_body");
+        tasks_body.append(taskdiv);
+    })
+
+}
+
+
