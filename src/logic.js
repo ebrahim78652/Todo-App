@@ -3,6 +3,13 @@ import {Project} from "./project.js";
 let projectsArray= [];
 let currentlySelectedProject;
 
+export function addDefaultProject(){
+    let defaultProject= Project("inbox");
+    projectsArray.push(defaultProject);
+    currentlySelectedProject= defaultProject;
+    console.log(projectsArray);
+    console.log(currentlySelectedProject);
+}
 
 export function addNewProject(contentOfInput){
     console.log("new project added!.")
@@ -25,5 +32,12 @@ currentlySelectedProject= projectsArray.filter((element)=>{
 })
 
 console.log(currentlySelectedProject);
+}
 
+export function getCurrentlySelectedProject(){
+    return currentlySelectedProject;
+}
+
+export function addnewTaskToCurrentProject(taskName){
+    currentlySelectedProject.addTask(taskName);
 }

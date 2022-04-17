@@ -1,6 +1,7 @@
 import {makeElement} from './DOMUtilities.js'
 import plusSymbol from "./assets/icons/plusSymbol.svg";
-
+import {makeNewProjectDiv} from "./projectFront.js";
+import {addDefaultProject} from "./logic.js"
 
 
 
@@ -31,6 +32,9 @@ import plusSymbol from "./assets/icons/plusSymbol.svg";
     
           project_sidebar_title.append(plus_symbol);
           project_sidebar.append(project_sidebar_title, project_sidebar_body);
+
+          
+
     
           return project_sidebar
      }
@@ -70,5 +74,11 @@ import plusSymbol from "./assets/icons/plusSymbol.svg";
 
     let container= document.querySelector(".container");
     container.append(header, main, footer);
+
+    //here make the UI for the default project. 
+    makeNewProjectDiv("inbox");
+    //add the default project in our logic
+    addDefaultProject();
+    
 
  }
