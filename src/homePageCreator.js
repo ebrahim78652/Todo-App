@@ -80,7 +80,4 @@ export let makeHomePage = function () {
     addDefaultProject();
     //here make the UI for the default project. 
     makeNewProjectDiv("inbox");
-
-
-
 }

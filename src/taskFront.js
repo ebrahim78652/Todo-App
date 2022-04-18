@@ -51,8 +51,6 @@ function newTaskDiv(taskName) {
     let checkBoxInput = makeElement("input", undefined, undefined);
 
     checkBoxInput.setAttribute("type", "checkbox");
-    checkBoxInput.setAttribute("data", numberOftasksInCurrentlySelectedProject);
-    checkBoxInput.setAttribute("id", numberOftasksInCurrentlySelectedProject);
     //add listener to the checkbox
     checkBoxInput.addEventListener("change", removeTask)
     console.log(checkBoxInput);
