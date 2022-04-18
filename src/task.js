@@ -2,8 +2,6 @@
 
 export function Task(taskName){
 
-    let name=taskName
-
-    return {name}
+ this.name=taskName
 
 }
